@@ -1,0 +1,60 @@
+<div class=" w-screen bg-amber-100 h-screen flex flex-col gap-20">
+    <header class="w-screen h-12 flex justify-center items-center text-2xl font-extrabold bg-blue-200 shadow">Product and Category Master App</header>
+    <div class="w-screen flex justify-center items-center">
+        <div class="w-[180vh] border-1 border-black min-h-90 p-4">
+            <div class="flex w-full pb-4 gap-10">
+                <div class="border-r px-4 py-2 cursor-pointer bg-blue-500 text-white">Category</div>
+                <div class="border-r px-4 py-2 cursor-pointer bg-blue-500 text-white">Product</div>
+            </div>
+            <div class="flex flex-col border-1 border-black h-64 relative">
+                <div class="border-r-1 border-b-1 border-black w-40 p-2 flex justify-center items-center">Category</div>
+                <div  class="w-[165vh] h-52 ml-6 mt-1 flex flex-col justify-center p-4 gap-2">                    
+                    
+                      <ul class="w-[150vh] h-52  ml-6 mt-1 flex flex-col">
+                        <li *ngFor="let category of categories" class="w-full list-none border-1 border-black px-2 py-1 mb-2 flex flex-row items-center justify-between">
+                          <!-- If in edit mode, show input field to update -->
+                          <div *ngIf="category.isEditing" class="flex flex-row items-center gap-2">
+                            <input 
+                              [(ngModel)]="category.CategoryName"
+                              class="border-2 p-1 rounded-md"
+                              placeholder="Edit Category Name"
+                            />
+                            <button 
+                              (click)="saveCategory(category)"
+                              class="px-4 py-1 bg-green-500 text-white rounded-md hover:bg-green-600">
+                              Save
+                            </button>
+                          </div>
+                      
+                          <!-- Else, display category name and action buttons -->
+                          <div *ngIf="!category.isEditing" class="flex flex-row items-center gap-2">
+                            <span class="mr-4">Id: {{ category.CategoryId }}</span>
+                            <span class="mr-4">CategoryName: {{ category.CategoryName }}</span>
+                            <div class="flex gap-2">
+                              <!-- Update Button: Toggle edit mode -->
+                              <button 
+                                (click)="toggleEditCategory(category)"
+                                class="px-4 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600">
+                                Update
+                              </button>
+                              
+                              <!-- Delete Button -->
+                              <button 
+                                (click)="deleteCategory(category.CategoryId)"
+                                class="px-4 py-1 bg-red-500 text-white rounded-md hover:bg-red-600">
+                                Delete
+                              </button>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                      
+                      
+                </div>
+                <button mat-flat-button color="primary" class="w-50 absolute bottom-2 -right-220">Create Category</button>
+            </div>
+        </div>
+    </div>
+    
+</div>
+  
