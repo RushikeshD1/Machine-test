@@ -167,7 +167,10 @@ export class HomeComponent {
   createCategoryForm!: FormGroup;
   editForm!: FormGroup;
   isCreateProductFormVisible = false;
-  newProduct: { ProductName: string, CategoryName: string } = { ProductName: '', CategoryName: '' };
+  newProduct: { ProductName: string; CategoryName: string } = {
+    ProductName: '',
+    CategoryName: '',
+  };
   products: Product[] = [];
   constructor(
     private categoryService: CategoryService,
@@ -210,14 +213,16 @@ export class HomeComponent {
   fetchProduct(): void {
     this.productService.getProducts().subscribe({
       next: (result: any) => {
-        console.log('API response:', result);  // Check the data being returned
+        console.log('API response:', result); // Check the data being returned
         if (result.data && Array.isArray(result.data.products)) {
           this.products = result.data.products.map((product: Product) => ({
             ...product,
             isEditing: false,
-            Category: this.categories.find(category => category.CategoryId === product.CategoryId)
+            Category: this.categories.find(
+              (category) => category.CategoryId === product.CategoryId
+            ),
           }));
-          console.log('Fetched products:', this.products);  // Check if duplicates exist here
+          console.log('Fetched products:', this.products); // Check if duplicates exist here
         } else {
           console.error('Error: products data is not an array or not found.');
           this.products = [];
@@ -228,8 +233,6 @@ export class HomeComponent {
       },
     });
   }
-  
-  
 
   toggleEditCategory(category: Category) {
     category.isEditing = !category.isEditing;
@@ -246,10 +249,10 @@ export class HomeComponent {
     if (categoryId === undefined) {
       return false; // Return false if categoryId is undefined
     }
-    return this.categories.some(category => category.CategoryId === categoryId);
+    return this.categories.some(
+      (category) => category.CategoryId === categoryId
+    );
   }
-  
-  
 
   deleteProduct(productId: number) {
     const confirmDelete = confirm(
@@ -287,7 +290,12 @@ export class HomeComponent {
 
   saveProduct(product: Product): void {
     // Check if the product name is valid and CategoryId is defined
-    if (product.ProductName && product.ProductName !== '' && product.CategoryId !== undefined && this.isValidCategory(product.CategoryId)) {
+    if (
+      product.ProductName &&
+      product.ProductName !== '' &&
+      product.CategoryId !== undefined &&
+      this.isValidCategory(product.CategoryId)
+    ) {
       this.productService.updateProduct(product).subscribe({
         next: () => {
           product.isEditing = false; // Exit editing mode
@@ -295,13 +303,12 @@ export class HomeComponent {
         },
         error: (error) => {
           console.error('Error updating product:', error);
-        }
+        },
       });
     } else {
       console.error('Invalid data: Product Name or Category is not valid');
     }
   }
-  
 
   deleteCategory(categoryId: number | undefined) {
     if (categoryId === undefined) {
@@ -358,36 +365,37 @@ export class HomeComponent {
   }
 
   isCategoryValid(categoryName: string): boolean {
-    return this.categories.some(category => category.CategoryName === categoryName);
+    return this.categories.some(
+      (category) => category.CategoryName === categoryName
+    );
   }
   createProduct(): void {
-    console.log('Before adding new product:', this.products);  // Log the current state of products
+    console.log('Before adding new product:', this.products); // Log the current state of products
     if (this.isCategoryValid(this.newProduct.CategoryName)) {
       const newProductData = {
         ProductName: this.newProduct.ProductName,
-        CategoryName: this.newProduct.CategoryName
+        CategoryName: this.newProduct.CategoryName,
       };
-  
+
       this.productService.createProduct(newProductData).subscribe({
         next: (product) => {
           // Check if the product is already in the list
-          const productExists = this.products.some(p => p.ProductId === product.ProductId);
-          console.log('Product exists:', productExists);  // Debug if the product is found
+          const productExists = this.products.some(
+            (p) => p.ProductId === product.ProductId
+          );
+          console.log('Product exists:', productExists); // Debug if the product is found
           if (!productExists) {
-            this.products.push(product);  // Only add it if it's not already there
+            this.products.push(product); // Only add it if it's not already there
           }
-          console.log('After adding new product:', this.products);  // Log the new products list
+          console.log('After adding new product:', this.products); // Log the new products list
           this.cancelCreateProduct(); // Hide the form after submission
         },
         error: (error) => {
           console.error('Error creating product:', error);
-        }
+        },
       });
     } else {
       alert('Category is not valid! Please choose an existing category.');
     }
   }
-  
-  
-  
 }

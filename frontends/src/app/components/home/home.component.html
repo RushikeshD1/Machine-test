@@ -10,20 +10,25 @@
       <div class="flex justify-start gap-8 mb-8">
         <div
           (click)="toggleTab('category')"
-          [ngClass]="{ 'bg-blue-600': activeTab === 'category' ,'bg-gray-400': activeTab !== 'category'}"
+          [ngClass]="{
+            'bg-blue-600': activeTab === 'category',
+            'bg-gray-400': activeTab !== 'category'
+          }"
           class="cursor-pointer text-white px-6 py-3 rounded-md hover:bg-blue-600 transition"
         >
           Category
         </div>
         <div
           (click)="toggleTab('product')"
-          [ngClass]="{ 'bg-blue-600': activeTab === 'product' , 'bg-gray-400': activeTab !== 'product'}"
+          [ngClass]="{
+            'bg-blue-600': activeTab === 'product',
+            'bg-gray-400': activeTab !== 'product'
+          }"
           class="cursor-pointer text-white px-6 py-3 rounded-md hover:bg-blue-600 transition"
         >
           Product
         </div>
       </div>
-
 
       <div *ngIf="activeTab === 'category'" class="mb-6">
         <h2 class="text-xl font-semibold text-gray-700 mb-4">Categories</h2>
@@ -130,7 +135,7 @@
                 (click)="toggleEditProduct(product.ProductId)"
                 class="border-1 border-black"
               >
-               {{product.isEditing ? 'Save' : 'Edit'}}
+                {{ product.isEditing ? "Save" : "Edit" }}
               </button>
 
               <button
@@ -141,12 +146,15 @@
               </button>
 
               <div *ngIf="product.isEditing">
-                <input [(ngModel)]="product.ProductName" placeholder="Edit Product Name" class="border-1 border-gray-300 p-2 mb-2"/>
+                <input
+                  [(ngModel)]="product.ProductName"
+                  placeholder="Edit Product Name"
+                  class="border-1 border-gray-300 p-2 mb-2"
+                />
               </div>
               <ng-template #displayProductName>
                 <span>Product Name: {{ product.ProductName }}</span>
               </ng-template>
-              
             </div>
           </div>
         </div>
@@ -155,26 +163,56 @@
         </div>
       </div>
       <div *ngIf="activeTab === 'product'">
-        <button (click)="openCreateProductForm()" class="border-1 border-black mb-4 bg-blue-700 text-white">Create Product</button>
-      <div *ngIf="isCreateProductFormVisible" class="mb-6">
-        <h3>Create New Product</h3>
-        <form (ngSubmit)="createProduct()" #createProductForm="ngForm">
-          <div>
-            <label for="productName">Product Name</label>
-            <input id="productName" name="productName" [(ngModel)]="newProduct.ProductName" placeholder="Enter Product Name" class="border-1 border-gray-300 p-2 mb-2" required>
-          </div>
-          
-          <div>
-            <label for="categoryName">Category Name</label>
-            <input id="categoryName" name="categoryName" [(ngModel)]="newProduct.CategoryName" placeholder="Enter Category Name" class="border-1 border-gray-300 p-2 mb-2" required>
-          </div>
-      
-          <button type="submit" [disabled]="!createProductForm.form.valid" class="border-1 border-black">Create Product</button>
-          <button type="button" (click)="cancelCreateProduct()" class="border-1 border-black ml-2">Cancel</button>
-        </form>
+        <button
+          (click)="openCreateProductForm()"
+          class="border-1 border-black mb-4 bg-blue-700 text-white"
+        >
+          Create Product
+        </button>
+        <div *ngIf="isCreateProductFormVisible" class="mb-6">
+          <h3>Create New Product</h3>
+          <form (ngSubmit)="createProduct()" #createProductForm="ngForm">
+            <div>
+              <label for="productName">Product Name</label>
+              <input
+                id="productName"
+                name="productName"
+                [(ngModel)]="newProduct.ProductName"
+                placeholder="Enter Product Name"
+                class="border-1 border-gray-300 p-2 mb-2"
+                required
+              />
+            </div>
+
+            <div>
+              <label for="categoryName">Category Name</label>
+              <input
+                id="categoryName"
+                name="categoryName"
+                [(ngModel)]="newProduct.CategoryName"
+                placeholder="Enter Category Name"
+                class="border-1 border-gray-300 p-2 mb-2"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              [disabled]="!createProductForm.form.valid"
+              class="border-1 border-black"
+            >
+              Create Product
+            </button>
+            <button
+              type="button"
+              (click)="cancelCreateProduct()"
+              class="border-1 border-black ml-2"
+            >
+              Cancel
+            </button>
+          </form>
+        </div>
       </div>
-      </div>
-      
     </div>
   </div>
 </div>

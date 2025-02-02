@@ -7,13 +7,5 @@ export const routes: Routes = [
     {
         path : "",
         component : HomeComponent
-    },
-    {
-        path : "category",
-        component : CategoryMasterComponent
-    },
-    {
-        path : "product",
-        component : ProductMasterComponent
     }
 ];
