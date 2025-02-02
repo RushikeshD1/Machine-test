@@ -25,10 +25,10 @@ This is a full-stack application built to manage products and categories in an e
     -CRUD operations for managing products.
     -Products are linked to categories via the Category Name.
     -Products display Product ID, Product Name, Category ID, and Category Name.
--**Server-side Pagination**:
+- **Server-side Pagination**:
     -The product list supports pagination, fetching only a subset of products per page (e.g., 10 per page).
     -Pagination works efficiently by querying only the required records for the current page (e.g., fetching products from 90 to 100 on page 9).
--**Dynamic Category-Product Relationship**:
+- **Dynamic Category-Product Relationship**:
     -When creating a product, the category can be passed by name, and the system will automatically map it to the correct Category ID.
     -Ensures that products are always associated with the correct category.
 
