@@ -1,59 +1,35 @@
-# Frontends
+# Product and Category Master App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
+## Overview
 
-## Development server
+This is a full-stack application built to manage products and categories in an e-commerce platform. The frontend is developed using Angular, the backend is powered by Node.js (Express), and MySQL is used as the database. This application provides functionalities to create, read, update, and delete products and categories.
 
-To start a local development server, run:
+- The **Category** feature allows managing different categories (e.g., electronics, clothing, etc.).
+- The **Product** feature allows managing products and associates them with categories. When creating a product, you can pass a category name to associate it with an existing category.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Technologies Used
 
-## Code scaffolding
+- **Frontend**: Angular
+- **Backend**: Node.js with Express.js
+- **Database**: MySQL
+- **Tools**: Postman (for API testing), npm, Angular CLI
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Features
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- **Category Management**:CRUD operations for managing categories (Create, Read, Update, Delete).
+- **Product Management**:
+    -CRUD operations for managing products.
+    -Products are linked to categories via the Category Name.
+    -Products display Product ID, Product Name, Category ID, and Category Name.
+-**Server-side Pagination**:
+    -The product list supports pagination, fetching only a subset of products per page (e.g., 10 per page).
+    -Pagination works efficiently by querying only the required records for the current page (e.g., fetching products from 90 to 100 on page 9).
+-**Dynamic Category-Product Relationship**:
+    -When creating a product, the category can be passed by name, and the system will automatically map it to the correct Category ID.
+    -Ensures that products are always associated with the correct category.
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+---
